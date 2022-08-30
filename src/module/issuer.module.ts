@@ -11,6 +11,7 @@ import { EnsureAuthMiddleware } from '../middleware/ensureAuth.service';
 import { IssuerRepositoryService } from '../repository/issuer-repository.service';
 import { IssuerServiceCreate } from '../service/issuer/issuer-Create.service';
 import { IssuerServiceDelete } from '../service/issuer/issuer-Delete.service';
+import { IssuerServiceUpdate } from '../service/issuer/issuer-Update.service';
 import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetByIdOrDocument.service';
 
 @Module({
@@ -19,6 +20,10 @@ import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetById
     {
       provide: 'IssuerRepositoryService',
       useClass: IssuerRepositoryService,
+    },
+    {
+      provide: 'IssuerServiceUpdate',
+      useClass: IssuerServiceUpdate,
     },
     {
       provide: 'IssuerServiceDelete',
