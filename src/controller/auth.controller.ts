@@ -6,10 +6,10 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
-import { CreateAuthDTO } from 'src/interface/createDTO';
-import { AuthServiceCreate } from 'src/service/auth/auth-Create.service';
-import { JoiValidationPipe } from 'src/validator/joiValidation.service';
-import { schemaCreateAuthOperation } from 'src/validator/schema/issuerCreateSchema';
+import { CreateAuthDTO } from '../interface/createDTO';
+import { AuthServiceCreate } from '../service/auth/auth-Create.service';
+import { JoiValidationPipe } from '../validator/joiValidation.service';
+import { schemaCreateAuthOperation } from '../validator/schema/issuerCreateSchema';
 
 @Controller('auth')
 export class AuthController {

@@ -5,8 +5,8 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { CreateAuthDTO } from 'src/interface/createDTO';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
+import { CreateAuthDTO } from '../../interface/createDTO';
+import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { AwsService } from '../aws/aws-service.service';

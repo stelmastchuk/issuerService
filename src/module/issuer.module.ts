@@ -6,13 +6,13 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { IssuerController } from 'src/controller/issuer.controller';
-import { PrismaService } from 'src/database/connection/connectionPrisma.service';
-import { EnsureAuthMiddleware } from 'src/middleware/ensureAuth.service';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
-import { IssuerServiceCreate } from 'src/service/issuer/issuer-Create.service';
-import { IssuerServiceDelete } from 'src/service/issuer/issuer-Delete.service';
-import { IssuerServiceGetByIdOrDocument } from 'src/service/issuer/issuer-GetByIdOrDocument.service';
-import { IssuerServiceUpdate } from 'src/service/issuer/issuer-update.service';
+import { PrismaService } from '../database/connection/connectionPrisma.service';
+import { EnsureAuthMiddleware } from '../middleware/ensureAuth.service';
+import { IssuerRepositoryService } from '../repository/issuer-repository.service';
+import { IssuerServiceCreate } from '../service/issuer/issuer-Create.service';
+import { IssuerServiceDelete } from '../service/issuer/issuer-Delete.service';
+import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetByIdOrDocument.service';
+import { IssuerServiceUpdate } from '../service/issuer/issuer-update.service';
 
 @Module({
   controllers: [IssuerController],

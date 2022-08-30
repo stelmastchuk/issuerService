@@ -6,8 +6,8 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Issuer } from '@prisma/client';
-import { CreateDTO } from 'src/interface/createDTO';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
+import { CreateDTO } from '../../interface/createDTO';
+import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 import { hash } from 'bcryptjs';
 
 @Injectable()

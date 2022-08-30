@@ -9,9 +9,9 @@ import { SecretsManager } from 'aws-sdk';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import { InjectAwsService } from 'nest-aws-sdk';
-import { PrismaService } from 'src/database/connection/connectionPrisma.service';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
-import { AwsService } from 'src/service/aws/aws-service.service';
+import { PrismaService } from '../database/connection/connectionPrisma.service';
+import { IssuerRepositoryService } from '../repository/issuer-repository.service';
+import { AwsService } from '../service/aws/aws-service.service';
 
 interface IPayLoad {
   sub: string;

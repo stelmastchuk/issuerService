@@ -6,7 +6,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Issuer } from '@prisma/client';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
+import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 
 @Injectable()
 export class IssuerServiceGetByIdOrDocument {

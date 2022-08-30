@@ -15,12 +15,12 @@ import {
 import { Issuer } from '@prisma/client';
 import { IssuerServiceCreate } from '../service/issuer/issuer-Create.service';
 import { CreatePassDTO } from '../interface/createDTO';
-import { IssuerServiceGetByIdOrDocument } from 'src/service/issuer/issuer-GetByIdOrDocument.service';
-import { IssuerServiceUpdate } from 'src/service/issuer/issuer-update.service';
-import { IssuerServiceDelete } from 'src/service/issuer/issuer-Delete.service';
-import { UpdateDPassDTO } from 'src/interface/updateDTO';
+import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetByIdOrDocument.service';
+import { IssuerServiceUpdate } from '../service/issuer/issuer-update.service';
+import { IssuerServiceDelete } from '../service/issuer/issuer-Delete.service';
+import { UpdateDPassDTO } from '../interface/updateDTO';
 import { Request } from 'express';
-import { JoiValidationPipe } from 'src/validator/joiValidation.service';
+import { JoiValidationPipe } from '../validator/joiValidation.service';
 import {
   schemaCreateOperation,
   schemaUpdatedOperation,

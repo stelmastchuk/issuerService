@@ -1,5 +1,5 @@
 import { ConsoleLogger, Inject, Injectable } from '@nestjs/common';
-import { IssuerRepositoryService } from 'src/repository/issuer-repository.service';
+import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 
 @Injectable()
 export class IssuerServiceDelete {
