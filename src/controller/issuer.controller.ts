@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Post,
-  Put,
   Inject,
   Body,
   Req,
@@ -16,15 +15,10 @@ import { Issuer } from '@prisma/client';
 import { IssuerServiceCreate } from '../service/issuer/issuer-Create.service';
 import { CreatePassDTO } from '../interface/createDTO';
 import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetByIdOrDocument.service';
-import { IssuerServiceUpdate } from '../service/issuer/issuer-update.service';
 import { IssuerServiceDelete } from '../service/issuer/issuer-Delete.service';
-import { UpdateDPassDTO } from '../interface/updateDTO';
 import { Request } from 'express';
 import { JoiValidationPipe } from '../validator/joiValidation.service';
-import {
-  schemaCreateOperation,
-  schemaUpdatedOperation,
-} from 'src/validator/schema/issuerCreateSchema';
+import { schemaCreateOperation } from 'src/validator/schema/issuerCreateSchema';
 
 @Controller('issuer')
 export class IssuerController {
@@ -35,8 +29,6 @@ export class IssuerController {
     private issuerServiceCreate: IssuerServiceCreate,
     @Inject('IssuerServiceDelete')
     private issuerServiceDelete: IssuerServiceDelete,
-    @Inject('IssuerServiceUpdate')
-    private issuerServiceUpdate: IssuerServiceUpdate,
     @Inject('IssuerServiceGetByIdOrDocument')
     private issuerServiceGetByIdOrDocument: IssuerServiceGetByIdOrDocument,
   ) {}
@@ -57,16 +49,16 @@ export class IssuerController {
     return this.issuerServiceCreate.execute(data);
   }
 
-  @Put()
-  @UsePipes(new JoiValidationPipe(schemaUpdatedOperation))
-  async updatedIssuer(
-    @Req() req: Request,
-    @Body() data: UpdateDPassDTO,
-  ): Promise<Issuer> {
-    this.logger.log('Put Executing...');
-    delete data.password_confirmation;
-    return this.issuerServiceUpdate.execute(req.company.id, data);
-  }
+  // @Put()
+  // @UsePipes(new JoiValidationPipe(schemaUpdatedOperation))
+  // async updatedIssuer(
+  //   @Req() req: Request,
+  //   @Body() data: UpdateDPassDTO,
+  // ): Promise<Issuer> {
+  //   this.logger.log('Put Executing...');
+  //   delete data.password_confirmation;
+  //   return this.issuerServiceUpdate.execute(req.company.id, data);
+  // }
 
   @Delete()
   deleteIssuer(@Req() req: Request): Promise<object> {

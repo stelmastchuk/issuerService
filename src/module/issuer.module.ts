@@ -12,7 +12,6 @@ import { IssuerRepositoryService } from '../repository/issuer-repository.service
 import { IssuerServiceCreate } from '../service/issuer/issuer-Create.service';
 import { IssuerServiceDelete } from '../service/issuer/issuer-Delete.service';
 import { IssuerServiceGetByIdOrDocument } from '../service/issuer/issuer-GetByIdOrDocument.service';
-import { IssuerServiceUpdate } from '../service/issuer/issuer-update.service';
 
 @Module({
   controllers: [IssuerController],
@@ -24,10 +23,6 @@ import { IssuerServiceUpdate } from '../service/issuer/issuer-update.service';
     {
       provide: 'IssuerServiceDelete',
       useClass: IssuerServiceDelete,
-    },
-    {
-      provide: 'IssuerServiceUpdate',
-      useClass: IssuerServiceUpdate,
     },
     {
       provide: 'IssuerServiceCreate',
