@@ -26,6 +26,8 @@ export class EnsureAuthMiddleware implements NestMiddleware {
     private readonly secretsManager: SecretsManager,
     @Inject(WINSTON_MODULE_PROVIDER)
     private readonly logger: Logger,
+    @Inject(PrismaService)
+    private readonly prismaService: PrismaService,
   ) {}
   async use(req: Request, res: Response, next: NextFunction) {
     this.logger.info('Execute Service EnsureAuthMiddleware');
@@ -34,8 +36,10 @@ export class EnsureAuthMiddleware implements NestMiddleware {
       this.secretsManager,
       this.logger,
     ).getSecreKey('SecretBank');
-    const prisma = new PrismaService();
-    const issuerRepositoryService = new IssuerRepositoryService(prisma);
+
+    const issuerRepositoryService = new IssuerRepositoryService(
+      this.prismaService,
+    );
 
     if (!authHeader) {
       throw new HttpException('Token missing', HttpStatus.UNAUTHORIZED);
@@ -62,8 +66,6 @@ export class EnsureAuthMiddleware implements NestMiddleware {
       next();
     } catch {
       throw new HttpException('Invalid token!', HttpStatus.UNAUTHORIZED);
-    } finally {
-      prisma.$disconnect();
     }
   }
 }

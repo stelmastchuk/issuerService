@@ -10,7 +10,7 @@ export const schemaCreateOperation = Joi.object({
     }
     /* eslint-disable */
     // @ts-ignore 
-    return helpers.message('DocumentNumber (cpf) is invalid!');
+    return helpers.message('DocumentNumber (cnpf) is invalid!');
   }),
   password: Joi.string().length(8).required(),
   password_confirmation: Joi.string()
@@ -24,13 +24,13 @@ export const schemaUpdatedOperation = Joi.object({
   companyName: Joi.string().max(15).optional(),
   email: Joi.string().email().optional(),
   documentNumber: Joi.string()
-    .custom((value, helper) => {
+    .custom((value, helpers) => {
       if (cnpj.isValid(value)) {
       return true;
     }
     /* eslint-disable */
     // @ts-ignore 
-    return helpers.message('DocumentNumber (cpf) is invalid!');
+    return helpers.message('DocumentNumber (cnpf) is invalid!');
     })
     .optional(),
   password: Joi.string().length(8).optional(),
