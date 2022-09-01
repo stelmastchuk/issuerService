@@ -1,26 +1,22 @@
-import {
-  ConsoleLogger,
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Issuer } from '@prisma/client';
 import { UpdateDTO } from '../../interface/updateDTO';
 import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 import { hash } from 'bcryptjs';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Injectable()
 export class IssuerServiceUpdate {
   constructor(
     @Inject('IssuerRepositoryService')
     private issuerRepositoryService: IssuerRepositoryService,
-    @Inject(ConsoleLogger)
-    private consoleLogger: ConsoleLogger,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger: Logger,
   ) {}
 
   async execute(issuerId: string, data: UpdateDTO): Promise<Issuer> {
-    this.consoleLogger.log(
+    this.logger.info(
       `Execute Service IssuerServiceUpdate:: ${issuerId} :: ${JSON.stringify(
         data,
       )}`,

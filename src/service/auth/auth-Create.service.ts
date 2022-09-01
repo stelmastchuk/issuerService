@@ -1,15 +1,11 @@
-import {
-  ConsoleLogger,
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateAuthDTO } from '../../interface/createDTO';
 import { IssuerRepositoryService } from '../../repository/issuer-repository.service';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { AwsService } from '../aws/aws-service.service';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Injectable()
 export class AuthServiceCreate {
@@ -18,14 +14,15 @@ export class AuthServiceCreate {
     private issuerRepositoryService: IssuerRepositoryService,
     @Inject('AwsService')
     private awsService: AwsService,
-    @Inject(ConsoleLogger)
-    private consoleLogger: ConsoleLogger,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger: Logger,
   ) {}
 
   async execute(data: CreateAuthDTO): Promise<object> {
-    this.consoleLogger.log(
+    this.logger.info(
       `Execute Service AuthServiceCreate:: ${JSON.stringify(data)}`,
     );
+
     const keys = await this.awsService.getSecreKey('SecretBank');
     const issuer = await this.issuerRepositoryService.user({
       email: data.email,

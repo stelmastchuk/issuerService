@@ -5,6 +5,8 @@ import { SecretsManager } from 'aws-sdk';
 import { AwsSdkModule } from 'nest-aws-sdk';
 import { AuthModule } from './module/auth.module';
 import { IssuerModule } from './module/issuer.module';
+import { WinstonModule } from 'nest-winston';
+import { format, transports } from 'winston';
 
 @Module({
   imports: [
@@ -21,6 +23,16 @@ import { IssuerModule } from './module/issuer.module';
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,
+    }),
+    WinstonModule.forRoot({
+      level: 'info',
+      exitOnError: false,
+      format: format.json(),
+      transports: [
+        new transports.File({
+          filename: `C:/Users/Vitor Stelmastchuk/Desktop/IssuerServiceNest/issuer-service/logs/log.log`,
+        }),
+      ],
     }),
   ],
   providers: [

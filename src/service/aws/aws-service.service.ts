@@ -1,6 +1,8 @@
-import { ConsoleLogger, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { SecretsManager } from 'aws-sdk';
 import { InjectAwsService } from 'nest-aws-sdk';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 interface ISecret {
   secretToken: string;
@@ -12,12 +14,12 @@ export class AwsService {
   constructor(
     @InjectAwsService(SecretsManager)
     private readonly secretsManager: SecretsManager,
-    @Inject(ConsoleLogger)
-    private consoleLogger: ConsoleLogger,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger: Logger,
   ) {}
 
   async getSecreKey(secretName: string): Promise<ISecret> {
-    this.consoleLogger.log(
+    this.logger.info(
       `Execute Service AwsServiceSecreteManager:: ${secretName}`,
     );
     try {

@@ -9,7 +9,6 @@ import {
   Req,
   ParseUUIDPipe,
   UsePipes,
-  Logger,
   Put,
 } from '@nestjs/common';
 import { Issuer } from '@prisma/client';
@@ -25,11 +24,11 @@ import {
   schemaUpdatedOperation,
 } from 'src/validator/schema/issuerCreateSchema';
 import { UpdateDPassDTO } from 'src/interface/updateDTO';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Controller('issuer')
 export class IssuerController {
-  private readonly logger = new Logger(IssuerController.name);
-
   constructor(
     @Inject('IssuerServiceCreate')
     private issuerServiceCreate: IssuerServiceCreate,
@@ -39,20 +38,22 @@ export class IssuerController {
     private issuerServiceDelete: IssuerServiceDelete,
     @Inject('IssuerServiceGetByIdOrDocument')
     private issuerServiceGetByIdOrDocument: IssuerServiceGetByIdOrDocument,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger: Logger,
   ) {}
 
   @Get('/:id')
   async getByIdIssuer(
     @Param('id', new ParseUUIDPipe()) issuerId: string,
   ): Promise<Issuer> {
-    this.logger.log('Get Executing...');
+    this.logger.info('Get Controller Executing...');
     return this.issuerServiceGetByIdOrDocument.execute(issuerId);
   }
 
   @Post()
   @UsePipes(new JoiValidationPipe(schemaCreateOperation))
   async createtIssuer(@Body() data: CreatePassDTO): Promise<Issuer> {
-    this.logger.log('Post Executing...');
+    this.logger.info('Post Conroller Executing...');
     delete data.password_confirmation;
     return this.issuerServiceCreate.execute(data);
   }
@@ -63,14 +64,14 @@ export class IssuerController {
     @Req() req: Request,
     @Body() data: UpdateDPassDTO,
   ): Promise<Issuer> {
-    this.logger.log('Put Executing...');
+    this.logger.info('Post Conroller Executing...');
     delete data.password_confirmation;
     return this.issuerServiceUpdate.execute(req.company.id, data);
   }
 
   @Delete()
   deleteIssuer(@Req() req: Request): Promise<object> {
-    this.logger.log('Delete Executing...');
+    this.logger.info('Delete Controller Executing...');
     return this.issuerServiceDelete.execute(req.company.id);
   }
 }

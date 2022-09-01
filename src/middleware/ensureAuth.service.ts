@@ -1,7 +1,7 @@
 import {
-  ConsoleLogger,
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   NestMiddleware,
 } from '@nestjs/common';
@@ -9,6 +9,8 @@ import { SecretsManager } from 'aws-sdk';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import { InjectAwsService } from 'nest-aws-sdk';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 import { PrismaService } from '../database/connection/connectionPrisma.service';
 import { IssuerRepositoryService } from '../repository/issuer-repository.service';
 import { AwsService } from '../service/aws/aws-service.service';
@@ -22,14 +24,15 @@ export class EnsureAuthMiddleware implements NestMiddleware {
   constructor(
     @InjectAwsService(SecretsManager)
     private readonly secretsManager: SecretsManager,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger: Logger,
   ) {}
   async use(req: Request, res: Response, next: NextFunction) {
-    const consoleLogger = new ConsoleLogger();
-    consoleLogger.log('Execute Service EnsureAuthMiddleware');
+    this.logger.info('Execute Service EnsureAuthMiddleware');
     const authHeader = req.headers.authorization;
     const keys = await new AwsService(
       this.secretsManager,
-      consoleLogger,
+      this.logger,
     ).getSecreKey('SecretBank');
     const prisma = new PrismaService();
     const issuerRepositoryService = new IssuerRepositoryService(prisma);
