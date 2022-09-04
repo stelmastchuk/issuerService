@@ -32,7 +32,7 @@ import { HealthCheckModule } from './module/healthcheck.module';
       format: format.json(),
       transports: [
         new transports.File({
-          filename: `C:/Users/Vitor Stelmastchuk/Desktop/IssuerServiceNest/issuer-service/logs/log.log`,
+          filename: `/home/ec2-user/app/logs/log.log`,
         }),
       ],
     }),
