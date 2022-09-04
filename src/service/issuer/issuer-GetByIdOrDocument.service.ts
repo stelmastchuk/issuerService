@@ -1,4 +1,11 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  ConsoleLogger,
+  LoggerService,
+} from '@nestjs/common';
 import { Issuer } from '@prisma/client';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
@@ -11,10 +18,12 @@ export class IssuerServiceGetByIdOrDocument {
     private issuerRepositoryService: IssuerRepositoryService,
     @Inject(WINSTON_MODULE_PROVIDER)
     private readonly logger: Logger,
+    @Inject(ConsoleLogger)
+    private readonly loggerService: LoggerService,
   ) {}
 
   async execute(issuerId: string): Promise<Issuer> {
-    this.logger.info(
+    this.loggerService.log(
       `Execute Service IssuerServiceGetByIdOrDocument:: ${issuerId}`,
     );
     const issuer = await this.issuerRepositoryService.user({
