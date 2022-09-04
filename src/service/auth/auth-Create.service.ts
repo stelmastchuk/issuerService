@@ -49,6 +49,8 @@ export class AuthServiceCreate {
       expiresIn: keys.secretTime,
     });
 
+    this.logger.info(`Execute Service AuthServiceCreate:: Succesfully`);
+
     return {
       token,
       Company: {

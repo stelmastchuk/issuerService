@@ -18,6 +18,8 @@ export class IssuerServiceDelete {
       issuerId,
     });
 
+    this.logger.info(`Execute Service IssuerServiceDelete:: Succesfully`);
+
     return { status: 'success' };
   }
 }

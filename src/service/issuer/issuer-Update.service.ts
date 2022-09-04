@@ -63,6 +63,8 @@ export class IssuerServiceUpdate {
 
     delete response.password;
 
+    this.logger.info(`Execute Service IssuerServiceUpdate:: Succesfully`);
+
     return response;
   }
 }

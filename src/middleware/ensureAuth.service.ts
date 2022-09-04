@@ -63,6 +63,7 @@ export class EnsureAuthMiddleware implements NestMiddleware {
         id: issuerId,
       };
 
+      this.logger.info('Execute Service EnsureAuthMiddleware:: Successfully');
       next();
     } catch {
       throw new HttpException('Invalid token!', HttpStatus.UNAUTHORIZED);

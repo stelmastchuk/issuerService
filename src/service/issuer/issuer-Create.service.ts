@@ -38,6 +38,8 @@ export class IssuerServiceCreate {
 
     delete response.password;
 
+    this.logger.info(`Execute Service IssuerServiceCreate:: Succesfully`);
+
     return response;
   }
 }
