@@ -18,7 +18,7 @@ export class IssuerServiceUpdate {
   async execute(issuerId: string, data: UpdateDTO): Promise<Issuer> {
     this.logger.info(
       `Execute Service IssuerServiceUpdate:: ${issuerId} :: ${JSON.stringify(
-        data,
+        data.companyName,
       )}`,
     );
     if (data.password) {

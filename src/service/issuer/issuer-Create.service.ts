@@ -17,7 +17,9 @@ export class IssuerServiceCreate {
 
   async execute(data: CreateDTO): Promise<Issuer> {
     this.logger.info(
-      `Execute Service IssuerServiceCreate:: ${JSON.stringify(data)}`,
+      `Execute Service IssuerServiceCreate:: ${JSON.stringify(
+        data.email,
+      )}, ${JSON.stringify(data.companyName)}`,
     );
 
     const issuerDocumentNumber = await this.issuerRepositoryService.user({

@@ -20,7 +20,7 @@ export class AuthServiceCreate {
 
   async execute(data: CreateAuthDTO): Promise<object> {
     this.logger.info(
-      `Execute Service AuthServiceCreate:: ${JSON.stringify(data)}`,
+      `Execute Service AuthServiceCreate:: ${JSON.stringify(data.email)}`,
     );
 
     const keys = await this.awsService.getSecreKey('SecretBank');
