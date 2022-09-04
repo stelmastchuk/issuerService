@@ -30,7 +30,7 @@ import { format, transports } from 'winston';
       format: format.json(),
       transports: [
         new transports.File({
-          filename: `/home/ec2-user/app`,
+          filename: `/home/ubuntu/app/logs/log.log`,
         }),
       ],
     }),
