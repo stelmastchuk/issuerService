@@ -7,11 +7,13 @@ import { AuthModule } from './module/auth.module';
 import { IssuerModule } from './module/issuer.module';
 import { WinstonModule } from 'nest-winston';
 import { format, transports } from 'winston';
+import { HealthCheckModule } from './module/healthcheck.module';
 
 @Module({
   imports: [
     IssuerModule,
     AuthModule,
+    HealthCheckModule,
     AwsSdkModule.forRootAsync({
       defaultServiceOptions: {
         useValue: {
@@ -30,7 +32,7 @@ import { format, transports } from 'winston';
       format: format.json(),
       transports: [
         new transports.File({
-          filename: `/home/ec2-user/app/logs/log.log`,
+          filename: `C:/Users/Vitor Stelmastchuk/Desktop/IssuerServiceNest/issuer-service/logs/log.log`,
         }),
       ],
     }),
