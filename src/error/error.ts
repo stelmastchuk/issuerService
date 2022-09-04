@@ -17,7 +17,7 @@ export class HttpErrorFilter implements ExceptionFilter {
       format: format.json(),
       transports: [
         new transports.File({
-          filename: `/home/ubuntu/app/logs/log.log`,
+          filename: `/home/ec2-user/app/logs/log.log`,
         }),
       ],
     });
