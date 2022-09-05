@@ -1,19 +1,17 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Res } from '@nestjs/common';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { HealthCheckService } from 'src/service/healthcheck/healthcheck.service';
+import { Response } from 'express';
 
 @Controller('healthcheck')
 export class HealthCheckController {
   constructor(
-    @Inject('HealthCheckService')
-    private healthCheckService: HealthCheckService,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
   @Get()
-  async healthCheck(): Promise<object> {
-    this.logger.info('Executing HelthCheck Controller');
-    return this.healthCheckService.execute();
+  async healthCheck(@Res() response: Response): Promise<Response> {
+    this.logger.info('Executing HelthCheck');
+    return response.status(200).send();
   }
 }
